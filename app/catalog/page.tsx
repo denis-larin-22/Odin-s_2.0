@@ -88,7 +88,7 @@ export default function CatalogFunction() {
                 {data.map((product, index) => (
                     <li key={index} className="group">
                         <Link
-                            href={"/catalog"}
+                            href={"/product"}
                         >
                             <div className="rounded-lg overflow-hidden">
                                 <img src={product.image} alt={product.name + product.model} className="group-hover:scale-105 duration-150" />
