@@ -56,7 +56,7 @@ export function Slider({ children, sliderCount }: SliderProps) {
                 </Button>
             </div>
             <div
-                className="overflow-x-hidden overflow-y-hidden flex h-full relative z-[15] touch-none"
+                className="overflow-x-hidden overflow-y-hidden flex h-full relative z-[15]"
                 ref={slideRef}
             >
                 <motion.div
