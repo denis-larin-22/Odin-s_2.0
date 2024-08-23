@@ -1,69 +1,26 @@
+'use client'
+
 import Link from "next/link";
 import Filter from "../components/ui/Filter";
+import { useEffect, useState } from "react";
+import { getProductList, ProductList } from "../lib/contentful/contentful-api";
+import Loader from "../components/ui/Loader";
 
-export default function CatalogFunction() {
-    const data = [
-        {
-            name: 'Nike',
-            model: "Air Alpha Force 88 x Billie",
-            count: 234,
-            season: "Літо",
-            sizes: "40-45",
-            image: "/images/nike.png"
-        },
-        {
-            name: 'Nike',
-            model: "Air Alpha Force 88 x Billie",
-            count: 234,
-            season: "Літо",
-            sizes: "40-45",
+export default function CatalogPage() {
+    const [productList, setProductList] = useState<ProductList | null>(null);
 
-            image: "/images/nike.png"
-        },
-        {
-            name: 'Nike',
-            model: "Air Alpha Force 88 x Billie",
-            count: 234,
-            season: "Літо",
-            sizes: "40-45",
-            image: "/images/nike.png"
-        },
-        {
-            name: 'Nike',
-            model: "Air Alpha Force 88 x Billie",
-            count: 234,
-            season: "Літо",
-            sizes: "40-45",
-            image: "/images/nike.png"
-        },
-        {
-            name: 'Nike',
-            model: "Air Alpha Force 88 x Billie",
-            count: 234,
-            season: "Літо",
-            sizes: "40-45",
-            image: "/images/nike.png"
-        },
-        {
-            name: 'Nike',
-            model: "Air Alpha Force 88 x Billie",
-            count: 234,
-            season: "Літо",
-            sizes: "40-45",
-            image: "/images/nike.png"
-        },
-        {
-            name: 'Nike',
-            model: "Air Alpha Force 88 x Billie",
-            count: 234,
-            season: "Літо",
-            sizes: "40-45",
-            image: "/images/nike.png"
-        },
-    ]
+    useEffect(() => {
+        async function getContent() {
+            const content = await getProductList();
+
+            setProductList(content);
+        }
+
+        getContent();
+    }, []);
 
     return (
-        <main className="container relative mt-24">
+        <main className="container relative mt-24 min-h-dvh">
             <img
                 alt="Odin`s logo"
                 src={"/images/odin`s-logo-black.svg"}
@@ -81,22 +38,35 @@ export default function CatalogFunction() {
                 <h1 className="text-2xl font-medium my-4">Каталог</h1>
                 <Filter />
             </div>
-            <ul className="relative z-10 select-none mt-16 grid grid-cols-1 xsm:grid-cols-2  md:grid-cols-3 items-end gap-4 mx-auto">
-                {data.map((product, index) => (
-                    <li key={index} className="group">
-                        <Link
-                            href={"/product"}
-                        >
-                            <div className="rounded-lg overflow-hidden">
-                                <img src={product.image} alt={product.name + product.model} className="group-hover:scale-105 duration-150" />
-                            </div>
-                            <p className="text-[#9E3500] font-medium">{product.name}</p>
-                            <p className="font-medium">{product.sizes}</p>
-                            <p className="font-medium text-[#707072]">{product.season}</p>
-                        </Link>
-                    </li>
-                ))}
-            </ul>
+            {
+                productList === null ?
+                    <div className="h-full flex items-center justify-center">
+                        <Loader />
+                    </div>
+                    :
+                    <>
+                        <ul className="relative z-10 select-none mt-16 grid grid-cols-1 xsm:grid-cols-2  md:grid-cols-3 items-end gap-4 mx-auto">
+                            {productList.map((product) => (
+                                <li key={product.id} className="group">
+                                    <Link
+                                        href={`/catalog/${product.sysId}/product`}
+                                    >
+                                        <div className="rounded-lg overflow-hidden h-[436px]">
+                                            <img
+                                                src={product.images[0].src}
+                                                alt={product.images[0].alt}
+                                                className="group-hover:scale-105 duration-150 w-full h-full object-cover"
+                                            />
+                                        </div>
+                                        <p className="text-[#9E3500] font-medium">{product.name}</p>
+                                        <p className="font-medium">{product.sizes}</p>
+                                        <p className="font-medium text-[#707072]">{product.season}</p>
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </>
+            }
         </main>
     )
 }
