@@ -60,7 +60,6 @@ export default function CatalogFunction() {
             sizes: "40-45",
             image: "/images/nike.png"
         },
-
     ]
 
     return (
@@ -78,11 +77,9 @@ export default function CatalogFunction() {
             <nav className="font-medium text-[15px] text-[#717171] hover:underline">
                 <Link href={"/"}>Головна {'>'} Каталог</Link>
             </nav>
-            <div className="flex items-start justify-between">
-                <h1 className="text-2xl font-medium">Каталог</h1>
-                <div className="">
-                    <Filter />
-                </div>
+            <div className="flex flex-col md:flex-row items-start justify-between">
+                <h1 className="text-2xl font-medium my-4">Каталог</h1>
+                <Filter />
             </div>
             <ul className="relative z-10 select-none mt-16 grid grid-cols-1 xsm:grid-cols-2  md:grid-cols-3 items-end gap-4 mx-auto">
                 {data.map((product, index) => (
