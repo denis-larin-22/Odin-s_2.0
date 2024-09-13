@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { Slider } from "./components/ui/Slider";
 import { useState, useEffect } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { BannerImages, getBannerImages, getProductList, ProductList } from "./lib/contentful/contentful-api";
 import Banner from "./components/ui/Banner";
 import Loader from "./components/ui/Loader";
@@ -57,7 +56,9 @@ export default function Home() {
             <Slider sliderCount={productList.filter(product => product.isPopular).length}>
               {
                 productList.filter(product => product.isPopular).map((product) => (
-                  <ProductCard product={product} />
+                  <div key={product.name + product.id}>
+                    <ProductCard product={product} />
+                  </div>
                 ))
               }
             </Slider>
@@ -88,7 +89,9 @@ export default function Home() {
             <Slider sliderCount={productList.filter(product => product.isBestOffers).length}>
               {
                 productList.filter(product => product.isBestOffers).map((product) => (
-                  <ProductCard product={product} />
+                  <div key={product.name + product.id}>
+                    <ProductCard product={product} />
+                  </div>
                 ))
               }
             </Slider>
