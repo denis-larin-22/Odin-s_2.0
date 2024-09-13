@@ -14,7 +14,7 @@ export default function ProductImages({ images }: { images: IImage[] }) {
                 {images.map((image, index) => (
                     <div
                         key={index}
-                        className={`w-[56px] md:w-[112px] h-[70px] md:h-[140px] overflow-hidden rounded-md cursor-pointer hover:brightness-75 ${currentImage === image ? "brightness-75" : ""}`}
+                        className={`w-[56px] md:w-[112px] h-[70px] md:h-[140px] overflow-hidden rounded-md cursor-pointer hover:brightness-75 hover:ring-2 ring-offset-0 hover:ring-offset-2 hover:ring-m-gray duration-150 ${currentImage === image ? "brightness-75" : ""}`}
                         onClick={() => setCurrentImage(image)}
                     >
                         <img

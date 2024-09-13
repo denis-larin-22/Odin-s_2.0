@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { BannerImages, getBannerImages, getProductList, ProductList } from "./lib/contentful/contentful-api";
 import Banner from "./components/ui/Banner";
 import Loader from "./components/ui/Loader";
+import { ProductCard } from "./components/ui/ProductCard";
 
 export default function Home() {
   const [bannerImages, setBannerImages] = useState<BannerImages | null>(null);
@@ -49,25 +50,14 @@ export default function Home() {
         <h2 className="text-3xl font-bold uppercase">Популярні</h2>
         {
           productList === null ?
-            <div className="h-full flex items-center justify-center">
+            <div className="h-[250px] flex items-center justify-center">
               <Loader />
             </div>
             :
-            <Slider sliderCount={productList.length}>
+            <Slider sliderCount={productList.filter(product => product.isPopular).length}>
               {
-                productList.map((product) => (
-                  <Link
-                    href={"/product"}
-                    key={product.id}
-                    className="w-[280px] xsm:w-[340px] lg:w-[360px] h-[280px] xsm:h-[340px] lg:h-[360px] relative flex items-center justify-center hover:brightness-95 duration-150 cursor-pointer"
-                  >
-                    <img
-                      src={product.images[0].src}
-                      alt={product.images[0].alt}
-                      className="w-full h-full object-cover"
-                    />
-                    <p className="text-[28px] font-bold uppercase absolute bottom-5 left-1/2 -translate-x-1/2">{product.name}</p>
-                  </Link>
+                productList.filter(product => product.isPopular).map((product) => (
+                  <ProductCard product={product} />
                 ))
               }
             </Slider>
@@ -95,21 +85,10 @@ export default function Home() {
               <Loader />
             </div>
             :
-            <Slider sliderCount={productList.length}>
+            <Slider sliderCount={productList.filter(product => product.isBestOffers).length}>
               {
-                productList.map((product) => (
-                  <Link
-                    href={"/product"}
-                    key={product.id}
-                    className="w-[280px] xsm:w-[340px] lg:w-[360px] h-[280px] xsm:h-[340px] lg:h-[360px] relative flex items-center justify-center hover:brightness-95 duration-150 cursor-pointer"
-                  >
-                    <img
-                      src={product.images[0].src}
-                      alt={product.images[0].alt}
-                      className="w-full h-full object-cover"
-                    />
-                    <p className="text-[28px] font-bold uppercase absolute bottom-5 left-1/2 -translate-x-1/2">{product.name}</p>
-                  </Link>
+                productList.filter(product => product.isBestOffers).map((product) => (
+                  <ProductCard product={product} />
                 ))
               }
             </Slider>

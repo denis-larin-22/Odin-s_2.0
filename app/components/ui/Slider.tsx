@@ -4,11 +4,12 @@ import { ReactNode, useEffect, useRef, useState } from "react";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 
 interface SliderProps {
-    children: ReactNode;
-    sliderCount: number;
+    children: ReactNode,
+    sliderCount: number,
+    className?: string
 }
 
-export function Slider({ children, sliderCount }: SliderProps) {
+export function Slider({ children, sliderCount, className = '' }: SliderProps) {
     const [carouselWidth, setCarouselWidth] = useState(0);
     const slideRef = useRef<HTMLDivElement>(null);
     const [current, setCurrent] = useState(0);
@@ -36,7 +37,7 @@ export function Slider({ children, sliderCount }: SliderProps) {
     }, [sliderCount]);
 
     return (
-        <section id="popular-plans-section" className="w-full h-full relative">
+        <section id="popular-plans-section" className={`w-full h-full relative ${className}`}>
             <div className="absolute top-1/2 left-0 w-fit flex justify-between px-5 z-[20]">
                 <Button
                     isIconOnly
