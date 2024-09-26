@@ -1,8 +1,6 @@
 'use client'
 
-
 import Link from "next/link";
-
 import Logo from "./Logo";
 import BurgerMenu from "../ui/BurgerMenu";
 import CallModal from "../ui/CallModal";
@@ -124,8 +122,12 @@ export function Header() {
                                             transition={{ duration: 0.7 }}
                                             className="absolute top-full bg-white flex p-2 rounded-b-xl shadow-lg"
                                         >
-                                            {item.subLinks.map((link) => (
-                                                <Link href={link.href} className="flex flex-col items-center gap-1 opacity-85 text-sm hover:bg-m-gray/10 duration-150 rounded-lg p-2">
+                                            {item.subLinks.map((link, index) => (
+                                                <Link
+                                                    key={link.title + index}
+                                                    href={link.href}
+                                                    className="flex flex-col items-center gap-1 opacity-85 text-sm hover:bg-m-gray/10 duration-150 rounded-lg p-2"
+                                                >
                                                     {link.icon}
                                                     {link.title}
                                                 </Link>
