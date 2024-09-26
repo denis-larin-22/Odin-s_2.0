@@ -19,7 +19,7 @@ export default function CatalogPage() {
     });
 
     const [currentPage, setCurrentPage] = useState(1);
-    const productsPerPage = 15;
+    const productsPerPage = 12;
 
     useEffect(() => {
         async function getContent() {
@@ -114,7 +114,7 @@ export default function CatalogPage() {
                 </ul>
                 {/* Отображать пагинацию только если больше одной страницы */}
                 {totalPages > 1 && (
-                    <div className="flex justify-between mt-8 text-sm">
+                    <div className="relative z-50 flex justify-between mt-8 text-sm">
                         <button
                             onClick={() => paginate(currentPage - 1)}
                             disabled={currentPage === 1} // Отключение кнопки, если на первой странице
@@ -122,7 +122,7 @@ export default function CatalogPage() {
                         >
                             Назад
                         </button>
-                        <div className="flex gap-0.5 w-full overflow-x-auto">
+                        <div className="flex gap-0.5 w-fit overflow-x-auto">
                             {
                                 pageNumbers.map((pageNumber) => (
                                     <button

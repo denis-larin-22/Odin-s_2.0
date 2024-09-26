@@ -103,7 +103,7 @@ export function Header() {
 
                     <nav className="hidden md:block">
                         <ul className="flex items-center gap-5 font-medium">
-                            <li className="hover:opacity-70 transition-opacity">
+                            <li key="catalog" className="hover:opacity-70 transition-opacity">
                                 <Link href="/catalog">Каталог</Link>
                             </li>
                             {links.map((item) => (
@@ -134,7 +134,7 @@ export function Header() {
                                     }
                                 </li>
                             ))}
-                            <li className="hover:opacity-70 transition-opacity">
+                            <li key="about-us" className="hover:opacity-70 transition-opacity">
                                 <Link href="/contacts">Про нас</Link>
                             </li>
                         </ul>

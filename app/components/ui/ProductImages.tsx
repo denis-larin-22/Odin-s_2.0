@@ -10,7 +10,7 @@ export default function ProductImages({ images }: { images: IImage[] }) {
 
     return (
         < section className="relative z-20 flex flex-col-reverse lg:flex-row gap-2" >
-            <div className="flex flex-row lg:flex-col gap-2">
+            <div className="max-h-[750px] flex flex-row lg:flex-col gap-2">
                 {images.map((image, index) => (
                     <div
                         key={index}

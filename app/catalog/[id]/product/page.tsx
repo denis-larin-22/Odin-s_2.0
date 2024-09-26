@@ -66,8 +66,6 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                             <p className="text-sm md:text-base text-justify font-medium mt-5 text-[#717171]">{product.material}</p>
                         </div>
                     </div>
-
-
                 </>
             )
             }
