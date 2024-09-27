@@ -47,7 +47,7 @@ export default function ProductImages({ images }: { images: IImage[] }) {
                         <img
                             src={currentImage.src}
                             alt="Product image"
-                            className="w-fit h-fit md:h-full relative z-30 rounded-md"
+                            className="w-fit h-fit md:h-full object-cover relative z-30 rounded-md"
                         />
                     </div>
                 }
